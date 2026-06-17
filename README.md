@@ -38,14 +38,20 @@ cert. Leave `SC_ENABLE_WRITES=false` for a read-only analyst.
 
 ### 3. Connect it to Claude Code
 
+Run this from the repo folder:
+
 ```bash
-claude mcp add --env SC_HOST=https://securitycenter.local \
-  --env SC_ACCESS_KEY=YOUR_KEY --env SC_SECRET_KEY=YOUR_SECRET --env SC_VERIFY=false \
-  --transport stdio tenablesc-ai-analyst -- "$(pwd)/.venv/bin/tenablesc-ai-analyst-mcp"
+claude mcp add --transport stdio tenablesc-ai-analyst -- "$(pwd)/.venv/bin/tenablesc-ai-analyst-mcp"
 ```
 
-Then `/mcp` should show it **connected**. (Same one-line server works in OpenCode —
-put it under `mcp` in `opencode.json` with `command: ["...","tenablesc-ai-analyst-mcp"]`.)
+No keys to repeat — the server reads the `.env` you set in step 2 (it loads the
+project's `.env` even when Claude Code launches it from another directory). Then
+`/mcp` should show it **connected**.
+
+> Installed somewhere without the repo's `.env` (e.g. a global/uvx install)? Pass
+> the keys explicitly instead: add `--env SC_HOST=… --env SC_ACCESS_KEY=… --env
+> SC_SECRET_KEY=…` before `--transport`. (Same server works in OpenCode — put it
+> under `mcp` in `opencode.json` with `command: ["…","tenablesc-ai-analyst-mcp"]`.)
 
 ### 4. Use
 

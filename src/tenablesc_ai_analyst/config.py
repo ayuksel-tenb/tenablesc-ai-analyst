@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 try:  # python-dotenv is a hard dependency, but stay importable without it.
     from dotenv import load_dotenv
@@ -36,8 +37,17 @@ def load_settings() -> Settings:
 
     Missing credentials are tolerated here so the server can still start and
     report a clear error on the first tool call (rather than failing to launch).
+
+    Loads ``.env`` both from the current directory and from the project root next
+    to the source — so when Claude Code launches the MCP server from another
+    working directory, an editable install still reads the repo's ``.env`` (no
+    need to repeat the keys as ``--env`` flags). Real environment variables (e.g.
+    ``--env`` passed by the MCP client) always take precedence over the file.
     """
-    load_dotenv()
+    load_dotenv()  # .env in the current working directory, if any
+    repo_env = Path(__file__).resolve().parents[2] / ".env"
+    if repo_env.is_file():
+        load_dotenv(repo_env, override=False)
 
     verify_raw = os.getenv("SC_VERIFY", "").strip()
     if verify_raw.lower() in {"1", "true", "yes", "on"}:
