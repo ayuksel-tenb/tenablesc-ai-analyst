@@ -20,11 +20,14 @@ calls the right Security Center analysis for you.
 ```bash
 git clone https://github.com/ayuksel-tenb/tenablesc-ai-analyst
 cd tenablesc-ai-analyst
-uv venv && source .venv/bin/activate     # or: python3 -m venv .venv && source .venv/bin/activate
-uv pip install -e .                       # or: pip install -e .
+uv venv && source .venv/bin/activate
+uv pip install -e .
 ```
 
-> Need uv? `curl -LsSf https://astral.sh/uv/install.sh | bash` (then a new terminal). Python 3.12+.
+Needs Python 3.12+. No `uv`? Install it once with
+`curl -LsSf https://astral.sh/uv/install.sh | bash` (then open a new terminal), or
+skip it entirely and use `python3 -m venv .venv && source .venv/bin/activate` then
+`pip install -e .`.
 
 ### 2. Configure
 
@@ -35,6 +38,9 @@ cp .env.example .env
 Set `SC_HOST`, `SC_ACCESS_KEY`, `SC_SECRET_KEY` in `.env` (generate API keys in
 Security Center under **Users → API Keys**). `SC_VERIFY=false` for a self-signed
 cert. Leave `SC_ENABLE_WRITES=false` for a read-only analyst.
+
+For a quick local test against a throwaway Security Center, copy the bundled
+`.env_test` instead (`cp .env_test .env`).
 
 ### 3. Connect it to Claude Code
 
