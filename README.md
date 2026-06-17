@@ -39,9 +39,6 @@ Set `SC_HOST`, `SC_ACCESS_KEY`, `SC_SECRET_KEY` in `.env` (generate API keys in
 Security Center under **Users → API Keys**). `SC_VERIFY=false` for a self-signed
 cert. Leave `SC_ENABLE_WRITES=false` for a read-only analyst.
 
-For a quick local test against a throwaway Security Center, copy the bundled
-`.env_test` instead (`cp .env_test .env`).
-
 ### 3. Connect it to Claude Code
 
 Run this from the repo folder:

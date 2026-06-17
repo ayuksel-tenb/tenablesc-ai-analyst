@@ -17,3 +17,8 @@ venv/
 .DS_Store
 .idea/
 .vscode/
+
+# Test env with creds is intentionally not committed
+.env_test
+.env.*
+!.env.example
